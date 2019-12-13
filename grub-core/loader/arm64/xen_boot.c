@@ -156,7 +156,7 @@ prepare_xen_module_params (struct xen_boot_binary *module, void *xen_boot_fdt)
       grub_fdt_add_subnode (xen_boot_fdt, chosen_node, module_name);
 
   retval = grub_fdt_set_prop (xen_boot_fdt, module_node, "compatible",
-			      MODULE_CUSTOM_COMPATIBLE, sizeof(MODULE_CUSTOM_COMPATIBLE) - 1);
+			      MODULE_CUSTOM_COMPATIBLE, sizeof(MODULE_CUSTOM_COMPATIBLE));
   if (retval)
     return grub_error (GRUB_ERR_IO, "failed to update FDT");
 
@@ -199,7 +199,7 @@ finalize_params_xen_boot (void)
   additional_size += FDT_NODE_NAME_MAX_SIZE + xen_hypervisor->cmdline_size;
   FOR_LIST_ELEMENTS (module, module_head)
   {
-    additional_size += 6 * FDT_NODE_NAME_MAX_SIZE + sizeof(MODULE_CUSTOM_COMPATIBLE) - 1
+    additional_size += 6 * FDT_NODE_NAME_MAX_SIZE + sizeof(MODULE_CUSTOM_COMPATIBLE)
       + module->cmdline_size;
   }
 
